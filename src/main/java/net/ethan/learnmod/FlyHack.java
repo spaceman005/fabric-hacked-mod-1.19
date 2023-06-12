@@ -7,8 +7,8 @@ import net.minecraft.util.math.Vec3d;
 
 public class FlyHack {
     private static boolean flyhackEnabled = true;
-    public static void setFlyhackEnabled(boolean enabled) {
-        flyhackEnabled = enabled;
+    public static void setFlyhackEnabled() {
+        flyhackEnabled = !flyhackEnabled;
     }
     static int tickCount = 0;
     public static void tick(MinecraftClient client) {
