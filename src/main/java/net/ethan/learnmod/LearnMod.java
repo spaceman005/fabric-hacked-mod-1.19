@@ -15,6 +15,7 @@ public class LearnMod implements ModInitializer {
 		ClientTickEvents.START_CLIENT_TICK.register(client -> {
 			FlyHack.tick();
 		});
+		FlyHack.setFlyhackEnabled(true);
 		//legit
 		ModItems.registerModItems();
 	}
