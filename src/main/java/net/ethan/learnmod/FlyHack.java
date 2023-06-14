@@ -7,36 +7,25 @@ import net.minecraft.util.math.Vec3d;
 
 public class FlyHack {
     private static boolean flyhackEnabled = true;
-    public static void setFlyhackEnabled(boolean enabled) {
-        flyhackEnabled = enabled;
+    private static int tickCount = 0;
+    private static final double MIN_VERTICAL_VELOCITY = -0.37; // Adjust this threshold as needed
+
+    public static void setFlyhackEnabled() {
+        flyhackEnabled = !flyhackEnabled;
     }
-    static int tickCount = 0;
-    public static void tick(MinecraftClient client) {
+
+    public static void tick() {
         if (flyhackEnabled) {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
-            if (player != null && player.world.isClient) {
-                Vec3d velocity = player.getVelocity();
+            if (player != null) {
+                player.getAbilities().allowFlying = true;
+                double yVelocity = player.getVelocity().y;
 
-                double motionY = 0;
-                double motionX = velocity.x;
-                double motionZ = velocity.z;
-                if (client.options.jumpKey.isPressed()) {
-                    motionY += 0.5;
+                if (yVelocity < MIN_VERTICAL_VELOCITY) {
+                    tickCount = 0;
                 }
-                else if (client.options.sneakKey.isPressed()) {
-                    motionY -= 0.35;
-                }
-                if (client.options.forwardKey.isPressed() && !player.isOnGround()){
-                    double speed = 0.35;
-                    float yawRad = player.getYaw() * MathHelper.RADIANS_PER_DEGREE;
 
-                    motionX = MathHelper.sin(-yawRad) * speed;
-                    motionZ = MathHelper.cos(yawRad) * speed;
-                }
-                //sets velocity based on actions taken by the player
-                player.setVelocity(new Vec3d(motionX, motionY, motionZ));
-
-                if (tickCount >= 35) {
+                if (tickCount >= 40) {
                     if (!player.isOnGround()){
                         Vec3d pos = player.getVelocity();
                         player.setVelocity(pos.x, -0.37, pos.z);
