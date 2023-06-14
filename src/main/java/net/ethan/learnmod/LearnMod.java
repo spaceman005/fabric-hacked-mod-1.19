@@ -13,7 +13,7 @@ public class LearnMod implements ModInitializer {
 	public void onInitialize() {
 		//fly hack
 		ClientTickEvents.START_CLIENT_TICK.register(client -> {
-			FlyHack.tick(client);
+			FlyHack.tick();
 		});
 		//legit
 		ModItems.registerModItems();
