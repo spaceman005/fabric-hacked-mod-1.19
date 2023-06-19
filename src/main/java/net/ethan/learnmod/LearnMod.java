@@ -17,5 +17,6 @@ public class LearnMod implements ModInitializer {
 		});
 		//legit
 		ModItems.registerModItems();
+
 	}
 }

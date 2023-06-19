@@ -21,10 +21,10 @@ public class FlyHack {
                 double motionX = velocity.x;
                 double motionZ = velocity.z;
                 if (client.options.jumpKey.isPressed()) {
-                    motionY += 0.5;
+                    motionY += 0.4;
                 }
                 else if (client.options.sneakKey.isPressed()) {
-                    motionY -= 0.35;
+                    motionY -= 0.4;
                 }
                 if (client.options.forwardKey.isPressed() && !player.isOnGround()){
                     double speed = 0.35;
